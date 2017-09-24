@@ -1,0 +1,6 @@
+{
+  "params": {
+    "body": "$input.body"
+  },
+  "action": "users-post"
+}

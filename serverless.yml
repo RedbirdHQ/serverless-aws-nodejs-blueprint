@@ -3,38 +3,64 @@ service: serverless-aws-nodejs-blueprint
 provider:
   name: aws
   runtime: nodejs6.10
-  stage: ${self:custom.env.stage}
-  region: ${self:custom.env.region}
+  stage: ${self:custom.params.stage}
+  region: ${self:custom.params.region}
 
 plugins:
   - serverless-webpack
   - serverless-s3-local
   - serverless-dynamodb-local
-  - serverless-offline
   - serverless-dynamodb-autoscaling
+  - serverless-offline
 
 custom:
-  env: ${file(./serverless.env.yml)}
+  params: ${file(./serverless.params.yml)}
+  dynamodb:
+    start:
+      port: ${self:custom.params.local.dynamodb.port}
+      migrate: true
+      seed: true
+    seed:
+      users:
+        sources:
+          - table: users
+            sources: [./data/users.json]
+  s3:
+    port: ${self:custom.params.local.s3.port}
+  capacities:
+    - table: UsersDynamoDBTable
+      read:
+        minimum: ${self:custom.params.capacities.users.read.minimum}
+        maximum: ${self:custom.params.capacities.users.read.maximum}
+        usage: ${self:custom.params.capacities.users.read.usage}
+      write:
+        minimum: ${self:custom.params.capacities.users.write.minimum}
+        maximum: ${self:custom.params.capacities.users.write.maximum}
+        usage: ${self:custom.params.capacities.users.write.usage}
 
 functions:
   users:
     handler: src/functions/users/index.handler
+    role: UsersRole
+    integration: lambda
     events:
       - http:
-        path: users
-        method: get
-      - http:
-        path: users
-        method: post
+          path: /users
+          method: post
+          integration: lambda
+          request:
+            template:
+              application/json: ${file(./deployment/api/users-post-template.json)}
   logs:
     handler: src/functions/logs/index.handler
+    role: LogsRole
     events:
       - stream:
-        type: dynamodb
-        arn:
-          Fn::GetAtt:
-            - users
-            - StreamArn
+          type: dynamodb
+          arn:
+            Fn::GetAtt:
+              - users
+              - StreamArn
 
 resources:
   Resources:
@@ -51,11 +77,13 @@ resources:
             AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: ${self:custom.env.capacities.users.read.default}
-          WriteCapacityUnits: ${self:custom.env.capacities.users.write.default}
+          ReadCapacityUnits: ${self:custom.params.capacities.users.read.default}
+          WriteCapacityUnits: ${self:custom.params.capacities.users.write.default}
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+    UsersRole: ${file(./deployment/iam/users-role.yml)}
     LogsS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: logs-${self:provider.stage}
+    LogsRole: ${file(./deployment/iam/logs-role.yml)}

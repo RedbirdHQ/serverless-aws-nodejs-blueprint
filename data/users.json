@@ -1,0 +1,42 @@
+[
+  {
+    "id": "9bd1932a-ddba-4b99-affd-ae5ef5478542",
+    "name": "Mack Larson",
+    "gender": "male",
+    "email": "macklarson@fuelworks.com",
+    "phone": "+1 (832) 566-3423",
+    "address": "302 Ditmas Avenue, Katonah, Arizona, 4097"
+  },
+  {
+    "id": "2d49c59d-f0c6-4220-af9f-cde2f0eb82a3",
+    "name": "Tara Buchanan",
+    "gender": "female",
+    "email": "tarabuchanan@fuelworks.com",
+    "phone": "+1 (840) 522-2596",
+    "address": "855 Quentin Street, Bowden, Idaho, 9121"
+  },
+  {
+    "id": "6a8d884b-358e-4187-87fe-6eb8f1a3aa7f",
+    "name": "Shannon Strong",
+    "gender": "male",
+    "email": "shannonstrong@fuelworks.com",
+    "phone": "+1 (943) 405-2410",
+    "address": "255 Rockaway Avenue, Witmer, Louisiana, 4479"
+  },
+  {
+    "id": "24cfd1ab-de06-41d7-b447-77ed9254f11c",
+    "name": "Bradley Parrish",
+    "gender": "male",
+    "email": "bradleyparrish@fuelworks.com",
+    "phone": "+1 (969) 536-2299",
+    "address": "870 Arkansas Drive, Brethren, American Samoa, 5521"
+  },
+  {
+    "id": "0a02ec6c-be8a-4d40-8809-51ec102811f7",
+    "name": "Roy Noble",
+    "gender": "male",
+    "email": "roynoble@fuelworks.com",
+    "phone": "+1 (946) 541-3657",
+    "address": "648 Hornell Loop, Genoa, Arkansas, 4112"
+  }
+]

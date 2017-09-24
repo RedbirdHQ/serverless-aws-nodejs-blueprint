@@ -1,4 +1,4 @@
-const asyncHandler = require('../../lib/async-handler');
+const asyncHandler = require('lib/async-handler');
 
 async function handler(event) {
   return event;

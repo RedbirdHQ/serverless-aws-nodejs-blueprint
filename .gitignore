@@ -3,4 +3,4 @@ package-lock.json
 coverage
 .serverless
 .webpack
-serverless.env.yml
+serverless.params.yml

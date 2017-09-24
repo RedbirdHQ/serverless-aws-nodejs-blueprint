@@ -1,1 +1,12 @@
-{}
+{
+  "params": {
+    "body": {
+      "name": "Miriam Swanson",
+      "gender": "female",
+      "email": "miriamswanson@exospeed.com",
+      "phone": "+1 (966) 541-2436",
+      "address": "825 Bushwick Court, Williams, New York, 5435"
+    }
+  },
+  "action": "users-post"
+}

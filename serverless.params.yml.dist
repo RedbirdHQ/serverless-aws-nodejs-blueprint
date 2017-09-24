@@ -1,6 +1,11 @@
 accountId: 1234567890 # Your account id
 stage: dev
 region: us-east-1
+local:
+  dynamodb:
+    port: 8000
+  s3:
+    port: 4567
 capacities:
   users:
     read:

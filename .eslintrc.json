@@ -1,9 +1,15 @@
 {
-    "extends": "airbnb-base",
-    "plugins": [
-      "jest"
-    ],
-    "env": {
-      "jest/globals": true
+  "extends": "airbnb-base",
+  "plugins": [
+    "jest"
+  ],
+  "env": {
+    "jest/globals": true
+  },
+  "overrides": [{
+    "files": ["src/lib/**"],
+    "rules": {
+      "import/no-extraneous-dependencies": 0
     }
+  }]
 }

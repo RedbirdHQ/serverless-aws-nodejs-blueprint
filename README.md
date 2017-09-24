@@ -40,3 +40,4 @@ npm run lint --fix
 - Code `logs` and `users` functions
 - Configure DynamoDB local and S3 local
 - Making multiple services work together with shared resources
+- Publish `aws-ome-sdk` publicly
