@@ -1,0 +1,54 @@
+{
+  "name": "serverless-aws-nodejs-blueprint",
+  "version": "1.0.0",
+  "description": "A serverless blueprint for AWS and Node.js",
+  "scripts": {
+    "test": "node node_modules/jest/bin/jest.js src --coverage",
+    "lint": "node node_modules/eslint/bin/eslint.js src/**",
+    "deploy": "node node_modules/serverless/bin/serverless deploy",
+    "local": "IS_OFFLINE=true node node_modules/serverless/bin/serverless invoke local -f $FUNC -p src/functions/$FUNC/event.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedbirdHQ/serverless-aws-nodejs-blueprint.git"
+  },
+  "keywords": [
+    "serverless",
+    "aws",
+    "nodejs",
+    "microservices",
+    "cloud",
+    "architecture"
+  ],
+  "author": {
+    "name": "Christophe Bougère",
+    "email": "cbougere@airware.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RedbirdHQ/serverless-aws-nodejs-blueprint/issues"
+  },
+  "homepage": "https://github.com/RedbirdHQ/serverless-aws-nodejs-blueprint",
+  "devDependencies": {
+    "aws-sdk": "^2.122.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "jest": "^21.1.0",
+    "serverless": "^1.23.0",
+    "serverless-dynamodb-autoscaling": "^0.6.1",
+    "serverless-dynamodb-local": "^0.2.25",
+    "serverless-offline": "^3.16.0",
+    "serverless-s3-local": "^0.2.6",
+    "serverless-webpack": "^3.1.0",
+    "webpack": "^3.6.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "@redbirdhq/aws-ome-sdk": "0.0.7",
+    "lib": "file:src/lib"
+  }
+}

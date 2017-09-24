@@ -1,0 +1,61 @@
+service: serverless-aws-nodejs-blueprint
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${self:custom.env.stage}
+  region: ${self:custom.env.region}
+
+plugins:
+  - serverless-webpack
+  - serverless-s3-local
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-dynamodb-autoscaling
+
+custom:
+  env: ${file(./serverless.env.yml)}
+
+functions:
+  users:
+    handler: src/functions/users/index.handler
+    events:
+      - http:
+        path: users
+        method: get
+      - http:
+        path: users
+        method: post
+  logs:
+    handler: src/functions/logs/index.handler
+    events:
+      - stream:
+        type: dynamodb
+        arn:
+          Fn::GetAtt:
+            - users
+            - StreamArn
+
+resources:
+  Resources:
+    UsersDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.env.capacities.users.read.default}
+          WriteCapacityUnits: ${self:custom.env.capacities.users.write.default}
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+    LogsS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: logs-${self:provider.stage}
