@@ -5,7 +5,7 @@ local:
   dynamodb:
     port: 8000
   s3:
-    port: 4567
+    port: 4569
 capacities:
   users:
     read:

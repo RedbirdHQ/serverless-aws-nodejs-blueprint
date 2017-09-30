@@ -1,15 +1,17 @@
 const users = require('..');
+const event = require('../event');
 
-describe('logs', () => {
+describe('users', () => {
   it('should run `users` handler and succeed', async () => {
-    const expectedData = {};
-    const data = await users.asyncHandler({}, {});
-    expect(data).toEqual(expectedData);
+    const res = await users.asyncHandler(event, {});
+    expect(res.code).toEqual('USER_CREATED');
+    expect(res.data).toBeDefined();
+    expect(res.data).toBeInstanceOf(Object);
   });
 
   it('should run `users` handler and fail', async () => {
     try {
-      await users.asyncHandler({}, {}); // TODO give failing data
+      await users.asyncHandler({}, {});
     } catch (e) {
       expect(e).toBeDefined();
       expect(e).toBeInstanceOf(Error);

@@ -51,16 +51,6 @@ functions:
           request:
             template:
               application/json: ${file(./deployment/api/users-post-template.json)}
-  logs:
-    handler: src/functions/logs/index.handler
-    role: LogsRole
-    events:
-      - stream:
-          type: dynamodb
-          arn:
-            Fn::GetAtt:
-              - users
-              - StreamArn
 
 resources:
   Resources:
@@ -79,11 +69,8 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: ${self:custom.params.capacities.users.read.default}
           WriteCapacityUnits: ${self:custom.params.capacities.users.write.default}
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
     UsersRole: ${file(./deployment/iam/users-role.yml)}
     LogsS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: logs-${self:provider.stage}
-    LogsRole: ${file(./deployment/iam/logs-role.yml)}
+        BucketName: logs

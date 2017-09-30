@@ -1,5 +1,6 @@
 const asyncHandler = require('lib/async-handler');
 const createUser = require('./create-user');
+const log = require('./log');
 
 async function handler(event) {
   let data = null;
@@ -13,6 +14,7 @@ async function handler(event) {
         code: 'ACTION_NOT_DEFINED',
       };
   }
+  await log(event.action, event.params, data);
   return data;
 }
 

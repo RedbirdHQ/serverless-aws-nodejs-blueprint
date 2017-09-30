@@ -4,3 +4,4 @@ coverage
 .serverless
 .webpack
 serverless.params.yml
+buckets
