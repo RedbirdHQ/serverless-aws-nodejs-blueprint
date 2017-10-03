@@ -1,4 +1,4 @@
-const AWS = require('@redbirdhq/aws-ome-sdk');
+const AWS = require('lib/aws');
 
 async function postObject(bucketName, filename, content) {
   const s3 = new AWS.S3();

@@ -1,4 +1,4 @@
-const AWS = require('@redbirdhq/aws-ome-sdk');
+const AWS = require('lib/aws');
 
 async function postItem(tableName, item) {
   const docClient = new AWS.DynamoDB.DocumentClient();

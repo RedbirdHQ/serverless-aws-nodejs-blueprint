@@ -52,7 +52,6 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "@redbirdhq/aws-ome-sdk": "0.0.7",
     "lib": "file:src/lib",
     "uuid": "^3.1.0"
   }

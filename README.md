@@ -66,6 +66,3 @@ npm run lint --fix
 - [Serverless DynamoDB local](https://github.com/99xt/serverless-dynamodb-local)
 - [Serverless DynamoDB autoscaling](https://github.com/sbstjn/serverless-dynamodb-autoscaling)
 - [Serverless S3](https://www.npmjs.com/package/serverless-s3-local)
-
-## TODO
-- Publish `aws-ome-sdk` publicly
